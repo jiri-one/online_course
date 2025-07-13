@@ -7,6 +7,7 @@
     ],
     "data": [
         "security/ir.model.access.csv",
+        "security/ir.rule.xml",
         "views/course_views.xml",
         "views/course_menus.xml",
     ],
@@ -14,4 +15,5 @@
     "license": "GPL-3",
     "installable": True,
     "auto_install": False,
+    "test": True,
 }
