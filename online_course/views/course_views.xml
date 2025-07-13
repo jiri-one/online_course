@@ -79,4 +79,20 @@
             </kanban>
         </field>
     </record>
+
+    <record id="view_users_form_inherit" model="ir.ui.view">
+        <field name="name">res.users.form.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button"
+                        type="object"
+                        name="action_view_courses"
+                        icon="fa-graduation-cap">
+                    <field string="Courses" name="course_count" widget="statinfo"/>
+                </button>
+            </div>
+        </field>
+    </record>
 </odoo>

@@ -59,3 +59,32 @@ class OnlineCourseEnrollment(Model):
         default="enrolled",
         required=True,
     )  # this is only ideas, not sure if it is needed
+
+
+class ResUsers(Model):
+    _inherit = "res.users"
+
+    course_count = fields.Integer(
+        string="Course Count",
+        compute="_compute_course_count"
+    )
+
+    @api.depends()
+    def _compute_course_count(self):
+        """Count courses for one teacher."""
+        for user in self:
+            user.course_count = self.env['online.course'].search_count([
+                ('teacher_id', '=', user.id)
+            ])
+
+    def action_view_courses(self):
+        """Action to open course for teacher."""
+        self.ensure_one()
+        return {
+            'name': f'Courses of {self.name}',
+            'type': 'ir.actions.act_window',
+            'res_model': 'online.course',
+            'view_mode': 'tree,form',
+            'domain': [('teacher_id', '=', self.id)],
+            'context': {'default_teacher_id': self.id}
+        }
