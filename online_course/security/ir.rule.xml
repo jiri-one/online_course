@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Students can see only published courses (I hope ...) -->
+    <record id="rule_course_published_only" model="ir.rule">
+        <field name="name">Students see only published courses</field>
+        <field name="model_id" ref="model_online_course"/>
+        <field name="domain_force">[('state', '=', 'published')]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <!-- Teachers can see only their courses -->
+    <record id="rule_course_teacher_own" model="ir.rule">
+        <field name="name">Teachers see only their own courses</field>
+        <field name="model_id" ref="model_online_course"/>
+        <field name="domain_force">[('teacher_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <!-- Admins are gods -->
+    <record id="rule_course_admin_all" model="ir.rule">
+        <field name="name">Admins see all courses</field>
+        <field name="model_id" ref="model_online_course"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('base.group_system'))]"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+</odoo>
