@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_online_course_main" 
+              name="Online Courses" 
+              sequence="10"/>
+
+    <menuitem id="menu_online_course_courses"
+              name="Courses"
+              parent="menu_online_course_main"
+              action="action_online_course"
+              sequence="10"/>
+</odoo>
